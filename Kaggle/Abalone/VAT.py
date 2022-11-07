@@ -37,7 +37,7 @@ def vat(data: np.ndarray, return_odm: bool = False, figure_size: Tuple = (10, 10
     _, ax = plt.subplots(figsize=figure_size)
     ax.imshow(
         ordered_dissimilarity_matrix,
-        cmap="gray",
+        cmap="coolwarm",
         vmin=0,
         vmax=np.max(ordered_dissimilarity_matrix),
     )
@@ -160,7 +160,7 @@ def ivat(data: np.ndarray, return_odm: bool = False, figure_size: Tuple = (10, 1
     ordered_matrix = compute_ivat_ordered_dissimilarity_matrix(data)
 
     _, ax = plt.subplots(figsize=figure_size)
-    ax.imshow(ordered_matrix, cmap="gray", vmin=0, vmax=np.max(ordered_matrix))
+    ax.imshow(ordered_matrix, cmap="coolwarm", vmin=0, vmax=np.max(ordered_matrix))
 
     if return_odm is True:
         return ordered_matrix
