@@ -1,6 +1,4 @@
-import tensorflow as tf
 from tensorflow import keras
-from keras.models import Sequential
 from keras.layers import Conv2D, AveragePooling2D, Flatten, Dense
 
 def build_lenet_5(input_shape, num_classes=10):
@@ -50,3 +48,7 @@ def lr_schedule(epoch):
     else:
         lr = 1e-5
     return lr
+
+if __name__=='__main__':
+    model = build_lenet_5(input_shape=(28,28,1))
+    model.summary()
