@@ -61,6 +61,9 @@ def inception_module(x, filters_1x1,
 
 def build_GoogLeNet(input_shape, num_classes=10):
     inputs = keras.Input(shape=input_shape)
+    input_tensor = keras.layers.experimental.preprocessing.Resizing(224, 224,
+                                                              interpolation="bilinear",
+                                                              input_shape=input_shape)(inputs)
 
     kernel_init = keras.initializers.glorot_uniform()
     bias_init = keras.initializers.Constant(value=0.2)
@@ -73,7 +76,7 @@ def build_GoogLeNet(input_shape, num_classes=10):
                activation='relu',
                name='conv_1_7x7/2',
                kernel_initializer=kernel_init,
-               bias_initializer=bias_init)(inputs)
+               bias_initializer=bias_init)(input_tensor)
     x = MaxPool2D(pool_size=3,
                   padding='same',
                   strides=2,
@@ -134,12 +137,13 @@ def build_GoogLeNet(input_shape, num_classes=10):
                          padding='valid')(x)
     x = Dropout(0.4)(x)
 
-    outputs = Dense(10, activation='softmax', name='output')(x)
+    x = keras.layers.Flatten()(x)
+    outputs = Dense(units=num_classes, activation='softmax', name='output')(x)
 
     model = keras.Model(inputs=inputs, outputs=outputs, name='GoogLeNet')
 
     return model
 
 if __name__=='__main__':
-    model = build_GoogLeNet((224, 224, 3))
+    model = build_GoogLeNet((32, 32, 3))
     model.summary()
