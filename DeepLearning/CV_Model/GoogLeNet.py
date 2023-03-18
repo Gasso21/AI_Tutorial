@@ -135,7 +135,7 @@ def build_GoogLeNet(input_shape, num_classes=10):
     x = AveragePooling2D(pool_size=7,
                          strides=1,
                          padding='valid')(x)
-    x = Dropout(0.4)(x)
+    x = Dropout(0.4)(x) 
 
     x = keras.layers.Flatten()(x)
     outputs = Dense(units=num_classes, activation='softmax', name='output')(x)
