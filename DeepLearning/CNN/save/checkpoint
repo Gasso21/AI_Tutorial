@@ -1,2 +1,0 @@
-model_checkpoint_path: "func_model.skpt"
-all_model_checkpoint_paths: "func_model.skpt"
